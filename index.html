@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript LocalStorage</title>
+    <script>
+      // TODO 7: Event Listener
+      document.addEventListener("DOMContentLoaded", loadNamesFromLocalStorage);
+
+      // TODO 1: Array erzeugen
+      let names = [];
+
+      // TODO 6: LocalStorage Item holen und in Array einfügen
+      function loadNamesFromLocalStorage() {
+        console.log(names);
+        names = JSON.parse(localStorage.getItem("names"));
+        console.log(names);
+      }
+
+      // TODO 4: LocalStorage Item setzen
+      function saveNamesToLocalStorage() {
+        console.log(JSON.stringify(names));
+        localStorage.setItem("names", JSON.stringify(names));
+      }
+
+      // TODO 5: Array und LocalStorage zurücksetzen
+      function deleteNames() {
+        names = [];
+        localStorage.removeItem("names");
+      }
+
+      // TODO 2: Namen hinzufügen zu Array
+      function addName() {
+        names.push(document.getElementById("addName").value);
+        console.log(names);
+      }
+
+      // TODO 3: Namen aus Array löschen
+      function deleteName() {
+        console.log(names);
+        const nameInput = document.getElementById("deleteName");
+        names = names.filter((name) => {
+          return name !== nameInput;
+        });
+        console.log(names);
+      }
+    </script>
+  </head>
+  <body>
+    <input id="addName" type="text" />
+    <button onclick="addName()">Add</button><br />
+    <input id="deleteName" type="text" />
+    <button onclick="deleteName()">Delete</button><br />
+    <button onclick="loadNamesFromLocalStorage()">Load</button>
+    <button onclick="saveNamesToLocalStorage()">Save</button>
+    <button onclick="deleteNames()">Delete All</button>
+  </body>
+</html>
